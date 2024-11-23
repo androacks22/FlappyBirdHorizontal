@@ -1,0 +1,29 @@
+# VSCode
+.vscode/
+
+# Archivos temporales de sistema
+.DS_Store
+Thumbs.db
+
+# Archivos de compilación y binarios
+*.exe
+*.dll
+*.so
+*.dylib
+*.app
+
+# Archivos de compilación de Love2D
+.love/
+
+# Carpeta de configuración de Love2D (si usas configuración personalizada)
+save/
+
+# Logs y archivos de errores
+*.log
+
+# Archivos de configuración específicos del sistema
+*.swp
+*.swo
+
+# Archivos generados por el sistema operativo
+Desktop.ini
