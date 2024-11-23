@@ -1,11 +1,9 @@
 -- Importa las librerías de terceros
 require("thirdparty.thirdparty")
-require("classes.player")
 
 function love.load()
     -- Configura Maid64
     maid.setup(600, 600, false)
-    Player:load()
 end
 
 function love.draw()

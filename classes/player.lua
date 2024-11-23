@@ -1,5 +1,13 @@
 Player = class("Player")
 
 function Player:load()
-    print("hello world")
+
+end
+
+function Player:draw()
+    
+end
+
+function Player:update(dt)
+    
 end
