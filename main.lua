@@ -1,15 +1,19 @@
 -- Importa las librerías de terceros
 require("thirdparty.thirdparty")
+require("systems.collision.collisionManager")
 
 function love.load()
     -- Configura Maid64
     maid.setup(600, 600, false)
+
+    --configura el sistema de colisiones
+    CollisionManager:load()
 end
 
 function love.draw()
     maid.start()
 
-    love.graphics.print("hello world")
+    CollisionManager:draw()
 
     maid.finish()
 end
@@ -17,6 +21,8 @@ end
 function love.update(dt)
     -- Escala la posición del ratón antes de actualizar LoveFrames
     local scaledX, scaledY = maid.mouse.getX(), maid.mouse.getY()
+
+    CollisionManager:update(dt);
 end
 
 function love.resize(w, h)
