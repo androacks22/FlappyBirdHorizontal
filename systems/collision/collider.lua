@@ -5,7 +5,6 @@ function Collider:initialize(x, y)
     self.type = "Null"
     self.x = x;
     self.y = y;
-    self.isColliding = false
     self.isColliding = false -- Si está colisionando
     self.isEntered = false   -- Si acaba de empezar a colisionar
     self.isExit = false      -- Si acaba de dejar de colisionar
