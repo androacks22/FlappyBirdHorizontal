@@ -40,6 +40,6 @@ end
 
 function Scene:DestroyScene()
     self.objects = nil
-    collectgarbage()
+    collectgarbage("collect")
     self.objects = {}
 end
