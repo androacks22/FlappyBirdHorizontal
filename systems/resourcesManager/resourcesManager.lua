@@ -1,13 +1,5 @@
 Resources = {
     assets = {
-        images = {}, -- Tabla para almacenar imágenes
-        sounds = {}, -- Tabla para almacenar sonidos
-        fonts = {}   -- Tabla para almacenar fuentes
-    }
-}
-
-Resources = {
-    assets = {
         images = {},
         sounds = {},
         fonts = {},
