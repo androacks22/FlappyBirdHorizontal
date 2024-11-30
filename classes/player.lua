@@ -2,7 +2,7 @@ Player = class("Player")
 
 function Player:initialize()
     self.position = {x=love.math.random(0, 600-32), y=love.math.random(0, 600-32)}
-    self.sprite = Resources:LoadImage("referencia1")
+    self.sprite = Resources:LoadImage("player")
     self.sfx = {["die"] = Resources:LoadSound("die")}
 
     love.audio.play(self.sfx["die"])
