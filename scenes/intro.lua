@@ -16,18 +16,42 @@ function IntroScene:initialize()
         for _, asset in ipairs(AssetLoader.toLoad) do
             if asset.type == "image" then
                 Resources:NewImage(asset.path, asset.name)
-
-            elseif asset.type == "quad" then
-                Resources:NewQuad()
             elseif asset.type == "sound" then
                 Resources:NewSound(asset.path, asset.name, asset.soundType)
+            elseif asset.type == "quad" then
+                if(asset.unique == true) then
+                    Resources:NewQuad(
+                        asset.name,
+                        asset.imageName,
+                        asset.x or 0,
+                        asset.y or 0,
+                        asset.w or 32,
+                        asset.h or 32
+                    )
+
+                else
+                    Resources:NewTileQuads(
+                        asset.name,
+                        asset.imageName,
+                        asset.x or 0,
+                        asset.y or 0,
+                        asset.w or 32,
+                        asset.h or 32,
+                        asset.cols or 1,
+                        asset.rows or 1,
+                        asset.spacing or 0
+                    )
+                end
             end
+
             self.loadedAssets = self.loadedAssets + 1
             self.loadingProgress = (self.loadedAssets / self.totalAssets) * 100
 
             -- Pausar la corutina para permitir el renderizado
             coroutine.yield()
         end
+
+        print(Resources:ListAssets())
 
         -- Marcar la carga como completada
         self.isLoadingComplete = true
