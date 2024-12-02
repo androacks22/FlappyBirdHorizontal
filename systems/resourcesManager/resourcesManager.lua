@@ -1,18 +1,11 @@
 Resources = {
     assets = {
-        images = {}, -- Tabla para almacenar imágenes
-        sounds = {}, -- Tabla para almacenar sonidos
-        fonts = {}   -- Tabla para almacenar fuentes
-    }
-}
-
-Resources = {
-    assets = {
         images = {},
+        quads = {},
         sounds = {},
         fonts = {},
         shaders = {}
-    }
+    },
 }
 
 --- Libera un recurso de la memoria.
@@ -92,6 +85,59 @@ end
 -- @return: imagen cargada o nil si no existe
 function Resources:LoadImage(name)
     return self.assets.images[name]
+end
+
+--- Crea y almacena un Quad asociado a una imagen.
+-- @param name Nombre del Quad.
+-- @param imageName Nombre de la imagen asociada.
+-- @param x Posición X del Quad en la imagen.
+-- @param y Posición Y del Quad en la imagen.
+-- @param width Ancho del Quad.
+-- @param height Alto del Quad.
+function Resources:NewQuad(name, imageName, x, y, width, height)
+    local image = self:LoadImage(imageName)
+    if not image then
+        error("Image not found: " .. imageName)
+    end
+    local asset = love.graphics.newQuad(x, y, width, height, image:getDimensions())
+    self:StoreAsset("quads", name, asset)
+end
+
+--- Crea y almacena múltiples Quads en formato de tiles.
+-- @param baseName Nombre base para los Quads (se les agregará un índice).
+-- @param imageName Nombre de la imagen asociada.
+-- @param startX Posición inicial X del primer Quad.
+-- @param startY Posición inicial Y del primer Quad.
+-- @param width Ancho de cada Quad.
+-- @param height Alto de cada Quad.
+-- @param cols Número de columnas (Quads por fila).
+-- @param rows Número de filas (cantidad de Quads).
+-- @param spacing Espaciado entre los Quads en píxeles (opcional, por defecto 0).
+function Resources:NewTileQuads(baseName, imageName, startX, startY, width, height, cols, rows, spacing)
+    local image = self:LoadImage(imageName)
+    if not image then
+        error("Image not found: " .. imageName)
+    end
+
+    spacing = spacing or 0
+
+    local quadIndex = 1
+    for row = 0, rows - 1 do
+        for col = 0, cols - 1 do
+            local x = startX + col * (width + spacing)
+            local y = startY + row * (height + spacing)
+            local name = baseName .. quadIndex
+            self:NewQuad(name, imageName, x, y, width, height)
+            quadIndex = quadIndex + 1
+        end
+    end
+end
+
+--- Carga un Quad existente por su nombre.
+-- @param name Nombre del Quad.
+-- @return El Quad cargado o nil si no existe.
+function Resources:LoadQuad(name)
+    return self.assets.quads[name]
 end
 
 -- Crea y almacena un sonido

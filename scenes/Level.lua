@@ -14,9 +14,21 @@ function Level:DestroyScene()
 end
 
 function Level:draw()
-    self.player:draw()
+    for i, v in ipairs(self.objects) do
+        if v.draw then
+            v:draw()
+        end 
+    end
 end
 
-function Level:Update(dt)
-    
+function Level:update(dt)
+    for i, v in ipairs(self.objects) do
+        if v.update then
+            v:update(dt)
+        end
+    end
+end
+
+function Level:mousepressed(x, y, button, isTouch)
+    self.player:mousepressed(x, y, button)
 end
